@@ -1,6 +1,4 @@
-from sqlalchemy.orm import Session
-
-from db.bd_session import engine, session
+from db.bd_session import engine
 from model.book import Base
 
 
@@ -10,8 +8,7 @@ def create_table():
     Лучше использовать Alembic для миграций БД,
     но времени на задание не много.
     """
-    with session.begin():
-        Base.metadata.create_all(engine)
+    Base.metadata.create_all(engine)
 
 
 def delete_table():
@@ -20,12 +17,10 @@ def delete_table():
     Лучше использовать Alembic для миграций БД,
     но времени на задание не много.
     """
-    with session.begin():
-        Base.metadata.drop_all(engine)
+    Base.metadata.drop_all(engine)
 
 
 if __name__ == '__main__':
 
-    with Session(engine) as session:
-        delete_table()
-        create_table()
+    delete_table()
+    create_table()
